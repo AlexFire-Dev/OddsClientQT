@@ -251,7 +251,108 @@ public:
     }
 
 
-    void filter() {}
+    void filter() {
+    ui->tableWidget->clear();
+        ui->tableWidget->clearContents();
+        ui->tableWidget->setRowCount(0);
+        ui->tableWidget->setHorizontalHeaderLabels(QStringList({"ID","Bookmaker", "League", "time", "Home", "Away", "Home_odd", "Away_odd","Change %"}));
+
+
+        sorted.clear();
+        for(auto u : all){
+
+              for (auto g : u.second){
+                  QDateTime currentDateTime1 = QDateTime::currentDateTime();
+                  double currentDateTime = currentDateTime1.toSecsSinceEpoch();
+                  for(auto st : u.second){
+                          currentDateTime = st.stamp;
+                          break;
+                  }
+
+
+
+                  double last = 0;
+                  if(ui->Time_box->currentText() == QString("ALL")){
+                       for(auto st : u.second){
+                               last = st.homeOd;
+                       }
+                   }
+                  else{
+                      int tm = 0;
+                      if(ui->Time_box->currentText() == QString("1 hour")) tm = 3600;
+                      if(ui->Time_box->currentText() == QString("3 hours")) tm = 3*3600;
+                      if(ui->Time_box->currentText() == QString("8 hours")) tm = 8*3600;
+                      if(ui->Time_box->currentText() == QString("12 hours")) tm = 12*3600;
+                      for(auto st : u.second){
+                          if(currentDateTime - tm < st.stamp)
+                              last = st.homeOd;
+                      }
+                  }
+                  if(last == 0)
+                      last = g.homeOd;
+                  sorted.push_back({abs(round(((last-g.homeOd)/g.homeOd*100)*10)/10.0),{u.first.first,u.first.second}});
+                  break;
+              }
+        }
+        sort(sorted.begin(),sorted.end());
+        reverse(sorted.begin(),sorted.end());
+
+
+
+
+
+        int kol_up = 0;
+        for(auto u : sorted){
+
+               for (auto g : all[{u.second.first, u.second.second}]){
+                   if((ui->Bookmaker_box->currentText() == g.bookmaker || ui->Bookmaker_box->currentText() == QString("ALL")) && (ui->League_box->currentText() == g.leagueName || ui->League_box->currentText() == QString("ALL"))){
+                       ui->tableWidget->insertRow( ui->tableWidget->rowCount());
+                       ui->tableWidget->setItem(kol_up, 0, new QTableWidgetItem(QString::number(u.second.first)));
+                       ui->tableWidget->setItem(kol_up, 1, new QTableWidgetItem(g.bookmaker));
+                       Book.insert(g.bookmaker);
+                       ui->tableWidget->setItem(kol_up, 2, new QTableWidgetItem(g.leagueName));
+                       League.insert(g.leagueName);
+                       ui->tableWidget->setItem(kol_up, 3, new QTableWidgetItem(g.time));
+                       ui->tableWidget->setItem(kol_up, 4, new QTableWidgetItem(g.home));
+                       ui->tableWidget->setItem(kol_up, 5, new QTableWidgetItem(g.away));
+                       ui->tableWidget->setItem(kol_up, 6, new QTableWidgetItem(QString::number(g.homeOd)));
+                       ui->tableWidget->setItem(kol_up, 7, new QTableWidgetItem(QString::number(g.awayOd)));
+                       QDateTime currentDateTime1 = QDateTime::currentDateTime();
+                       double currentDateTime = currentDateTime1.toSecsSinceEpoch();
+                       for(auto st : all[{u.second.first, u.second.second}]){
+                               currentDateTime = st.stamp;
+                               break;
+                       }
+
+                       double last = 0;
+                       if(ui->Time_box->currentText() == QString("ALL")){
+                            for(auto st : all[{u.second.first, u.second.second}]){
+                                    last = st.homeOd;
+                            }
+                        }
+                       else{
+                           int tm = 0;
+                           if(ui->Time_box->currentText() == QString("1 hour")) tm = 3600;
+                           if(ui->Time_box->currentText() == QString("3 hours")) tm = 3*3600;
+                           if(ui->Time_box->currentText() == QString("8 hours")) tm = 8*3600;
+                           if(ui->Time_box->currentText() == QString("12 hours")) tm = 12*3600;
+                           for(auto st : all[{u.second.first, u.second.second}]){
+                               if(currentDateTime - tm < st.stamp)
+                                   last = st.homeOd;
+                           }
+                       }
+                       if(last == 0)
+                           last = g.homeOd;
+                       ui->tableWidget->setItem(kol_up, 8, new QTableWidgetItem(QString::number(round(((last-g.homeOd)/g.homeOd*100)*10)/10.0)));
+                       ++kol_up;
+                       break;
+                   }
+
+
+               }
+        }
+        //ui->tableWidget->sortItems(8, Qt::DescendingOrder);
+    }
 
 
     QString token;
