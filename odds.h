@@ -45,7 +45,7 @@ public:
     std::map <std::pair <int, QString> , std::vector <odd_table>> all;
     std::set<QString> Book;
     std::set<QString> League;
-    void ready() {
+    void ready(){
         ui->tableWidget->clear();
         ui->tableWidget->clearContents();
         ui->tableWidget->setRowCount(0);
@@ -173,6 +173,9 @@ public:
                 int kol_up = 0;
 
 
+
+
+
                 for(auto u : sorted){
 
                     for (auto g : all[{u.second.first, u.second.second}]){
@@ -200,6 +203,16 @@ public:
                             break;
                          }
                    }
+
+
+
+
+
+
+
+
+
+
 
 
 //                    for(auto u : all){
@@ -251,8 +264,8 @@ public:
     }
 
 
-    void filter() {
-    ui->tableWidget->clear();
+    void filter(){
+        ui->tableWidget->clear();
         ui->tableWidget->clearContents();
         ui->tableWidget->setRowCount(0);
         ui->tableWidget->setHorizontalHeaderLabels(QStringList({"ID","Bookmaker", "League", "time", "Home", "Away", "Home_odd", "Away_odd","Change %"}));
