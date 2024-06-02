@@ -36,44 +36,49 @@ void Login::on_regestration_clicked()
     request.setUrl(QUrl("http://af.shvarev.com/oauth/token/login/"));
     QNetworkAccessManager *manager = new QNetworkAccessManager();
 
-        // Создаем запрос
-        QUrl url("http://af.shvarev.com/oauth/token/login/");
-        QNetworkRequest request(url);
-        request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+    // Создаем запрос
+    QUrl url("http://af.shvarev.com/oauth/token/login/");
+    QNetworkRequest request(url);
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 
-        // Подготавливаем данные
-        QJsonObject data;
-        data.insert("email", login);
-        data.insert("password", password);
-        QByteArray jsonData = QJsonDocument(data).toJson();
+    // Подготавливаем данные
+    QJsonObject data;
+    data.insert("email", login);
+    data.insert("password", password);
+    QByteArray jsonData = QJsonDocument(data).toJson();
 
-        // Отправляем запрос
-        QNetworkReply *reply = manager->post(request, jsonData);
+    // Отправляем запрос
+    QNetworkReply *reply = manager->post(request, jsonData);
 
-        // Обработка ответа
-        QByteArray main_data;
-        connect(reply, &QNetworkReply::finished, [reply, this]() {
-            if (reply->error() == QNetworkReply::NoError) {
-                QByteArray main_data = reply->readAll();
-                qDebug() << "Ответ сервера: " << main_data;
-                this->hide();
-                QString tk = "";
-                int kol = 0;
-                for(int i = 0; i< main_data.length(); i++){
-                    if(main_data[i] == '"'){
-                        kol++;
-                        continue;
-                    }
-                    if(kol==3)
-                           tk+=main_data[i];
+    // Обработка ответа
+    QByteArray main_data;
+    connect(reply, &QNetworkReply::finished, [reply, this]() {
+        if (reply->error() == QNetworkReply::NoError) {
+            QByteArray main_data = reply->readAll();
+            qDebug() << "Ответ сервера: " << main_data;
+            this->hide();
+            odds win;
+            QString tk = "";
+            int kol = 0;
+            for(int i = 0; i< main_data.length(); i++){
+                if(main_data[i] == '"'){
+                    kol++;
+                    continue;
                 }
-                qDebug() << win.token << endl;
-            } else {
-                qDebug() << "Ошибка: " << reply->errorString();
-                QMessageBox::warning(this, "Авторизация", "Пароль или логин не коректен");
+                if(kol==3)
+                    tk+=main_data[i];
             }
-            reply->deleteLater();
-        });
+            win.token ="Token " + tk;
+            win.ready();
+            qDebug() << win.token << endl;
+            win.setWindowTitle("Odds_Table");
+            win.exec();
+        } else {
+            qDebug() << "Ошибка: " << reply->errorString();
+            QMessageBox::warning(this, "Authorization", "Login or password incorrect!");
+        }
+        reply->deleteLater();
+    });
 
 //    if(main_data != "Error transferring http://af.shvarev.com/oauth/token/login/ - server replied: Bad Request"){
 //        hide();
