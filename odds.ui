@@ -27,7 +27,11 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QTableWidget" name="tableWidget"/>
+    <widget class="QTableWidget" name="tableWidget">
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(216, 216, 216);</string>
+     </property>
+    </widget>
    </item>
    <item>
     <widget class="QGroupBox" name="Filters">
@@ -36,6 +40,9 @@
        <width>200</width>
        <height>60</height>
       </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(197, 198, 199);</string>
      </property>
      <property name="title">
       <string>Filters</string>
@@ -55,6 +62,24 @@
         <verstretch>0</verstretch>
        </sizepolicy>
       </property>
+      <property name="styleSheet">
+       <string notr="true">  align-items: center;
+  background-color: #1e1e24;
+  color: #ffff7f;
+  cursor: pointer;
+  display: flex;
+  font-family: Inter,sans-serif;
+  font-size: 18px;
+  justify-content: center;
+  line-height: 20px;
+  padding: 0 25px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;</string>
+      </property>
      </widget>
      <widget class="QComboBox" name="League_box">
       <property name="geometry">
@@ -71,15 +96,51 @@
         <verstretch>0</verstretch>
        </sizepolicy>
       </property>
+      <property name="styleSheet">
+       <string notr="true">  align-items: center;
+  background-color: #1e1e24;
+  color: #ffff7f;
+  cursor: pointer;
+  display: flex;
+  font-family: Inter,sans-serif;
+  font-size: 18px;
+  justify-content: center;
+  line-height: 20px;
+  padding: 0 25px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;</string>
+      </property>
      </widget>
      <widget class="QPushButton" name="Apply_Button">
       <property name="geometry">
        <rect>
         <x>30</x>
         <y>20</y>
-        <width>81</width>
+        <width>111</width>
         <height>31</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">  align-items: center;
+  background-color: #1e1e24;
+  color: #ffff7f;
+  cursor: pointer;
+  display: flex;
+  font-family: Inter,sans-serif;
+  font-size: 18px;
+  justify-content: center;
+  line-height: 20px;
+  padding: 0 25px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;</string>
       </property>
       <property name="text">
        <string>Apply</string>
@@ -94,6 +155,24 @@
         <height>31</height>
        </rect>
       </property>
+      <property name="styleSheet">
+       <string notr="true">  align-items: center;
+  background-color: #1e1e24;
+  color: #ffff7f;
+  cursor: pointer;
+  display: flex;
+  font-family: Inter,sans-serif;
+  font-size: 18px;
+  justify-content: center;
+  line-height: 20px;
+  padding: 0 25px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;</string>
+      </property>
      </widget>
      <widget class="QPushButton" name="Graph">
       <property name="geometry">
@@ -103,6 +182,24 @@
         <width>161</width>
         <height>31</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">  align-items: center;
+  background-color: #1e1e24;
+  color: #ffff7f;
+  cursor: pointer;
+  display: flex;
+  font-family: Inter,sans-serif;
+  font-size: 18px;
+  justify-content: center;
+  line-height: 20px;
+  padding: 0 25px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;</string>
       </property>
       <property name="text">
        <string>Draw Graph</string>
@@ -116,6 +213,24 @@
         <width>171</width>
         <height>31</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">  align-items: center;
+  background-color: #1e1e24;
+  color: #ffff7f;
+  cursor: pointer;
+  display: flex;
+  font-family: Inter,sans-serif;
+  font-size: 18px;
+  justify-content: center;
+  line-height: 20px;
+  padding: 0 25px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;</string>
       </property>
       <property name="text">
        <string>Update Table</string>

@@ -243,14 +243,18 @@ public:
 //                             }
 //                       }
                     //ui->tableWidget->sortItems(8, Qt::DescendingOrder);
+
+                    ui->Time_box->clear();
                     ui->Time_box->addItem("ALL");
                     ui->Time_box->addItem("1 hour");
                     ui->Time_box->addItem("3 hours");
                     ui->Time_box->addItem("8 hours");
                     ui->Time_box->addItem("12 hours");
+                    ui->Bookmaker_box->clear();
                     ui->Bookmaker_box->addItem("ALL");
                     for(auto u : Book)
                         ui->Bookmaker_box->addItem(u);
+                    ui->League_box->clear();
                     ui->League_box->addItem("ALL");
                     for(auto u : League)
                         ui->League_box->addItem(u);

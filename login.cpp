@@ -5,12 +5,16 @@
 #include <QJsonObject>
 #include <QJsonDocument>
 #include <QByteArray>
+#include <QPixmap>
 
 Login::Login(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::Login)
 {
     ui->setupUi(this);
+    ui->password->setStyleSheet("#myLabel { color: white; }");
+    ui->login->setObjectName("myLabel");
+    ui->login->setStyleSheet("#myLabel { color: white; }");
     ui->password->setEchoMode(QLineEdit::Password);
     manager = new QNetworkAccessManager(this);
     connect(manager, &QNetworkAccessManager::finished,
@@ -19,6 +23,14 @@ Login::Login(QWidget *parent)
                qDebug() << answer;
            }
        );
+
+    QPixmap pix("C:\\Users\\HYPERPC\\Documents\\Odd\\img\\houseeee.png");
+    int w = ui->image->width();
+    int h = ui->image->height();
+
+    ui->image->setPixmap(pix.scaled(w, h, Qt::KeepAspectRatio));
+
+
 }
 
 Login::~Login()

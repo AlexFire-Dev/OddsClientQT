@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/"/>
+    <qresource prefix="/img"/>
+    <qresource prefix="/n"/>
+</RCC>
