@@ -188,12 +188,15 @@ public:
                             ui->tableWidget->setItem(kol_up, 3, new QTableWidgetItem(g.time));
                             ui->tableWidget->setItem(kol_up, 4, new QTableWidgetItem(g.home));
                             ui->tableWidget->setItem(kol_up, 5, new QTableWidgetItem(g.away));
-                            ui->tableWidget->setItem(kol_up, 6, new QTableWidgetItem(QString::number(g.homeOd)));
-                            ui->tableWidget->setItem(kol_up, 7, new QTableWidgetItem(QString::number(g.awayOd)));
                             double last = 0;
+                            double last_2 = 0;
                             for(auto st : all[{u.second.first, u.second.second}]){
                                 last = st.homeOd;
+                                last_2 = st.awayOd;
                             }
+                            ui->tableWidget->setItem(kol_up, 6, new QTableWidgetItem(QString::number(last)));
+                            ui->tableWidget->setItem(kol_up, 7, new QTableWidgetItem(QString::number(last_2)));
+
 
                             ui->tableWidget->setItem(kol_up, 8, new QTableWidgetItem(QString::number(round(((last-g.homeOd)/g.homeOd*100)*10)/10.0)));
                             //ui->tableWidget->item(kol_up, 8)->setData(Qt::DisplayRole, QVariant(round(((last-g.homeOd)/g.homeOd*100)*10)/10.0));
@@ -330,10 +333,16 @@ public:
                        ui->tableWidget->setItem(kol_up, 2, new QTableWidgetItem(g.leagueName));
                        League.insert(g.leagueName);
                        ui->tableWidget->setItem(kol_up, 3, new QTableWidgetItem(g.time));
+                       double last_1 = 0;
+                       double last_2 = 0;
+                       for(auto st : all[{u.second.first, u.second.second}]){
+                           last_1 = st.homeOd;
+                           last_2 = st.awayOd;
+                       }
                        ui->tableWidget->setItem(kol_up, 4, new QTableWidgetItem(g.home));
                        ui->tableWidget->setItem(kol_up, 5, new QTableWidgetItem(g.away));
-                       ui->tableWidget->setItem(kol_up, 6, new QTableWidgetItem(QString::number(g.homeOd)));
-                       ui->tableWidget->setItem(kol_up, 7, new QTableWidgetItem(QString::number(g.awayOd)));
+                       ui->tableWidget->setItem(kol_up, 6, new QTableWidgetItem(QString::number(last_1)));
+                       ui->tableWidget->setItem(kol_up, 7, new QTableWidgetItem(QString::number(last_2)));
                        QDateTime currentDateTime1 = QDateTime::currentDateTime();
                        double currentDateTime = currentDateTime1.toSecsSinceEpoch();
                        for(auto st : all[{u.second.first, u.second.second}]){
